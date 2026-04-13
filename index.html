@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coconut Creek Subaru | New & Used Subaru Dealership</title>
+    <meta name="description"
+        content="Visit Coconut Creek Subaru for the best deals on new and used Subaru vehicles. Your trusted Subaru dealer in South Florida.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #003399;
+            --secondary-blue: #0055CC;
+            --accent-pink: #E6007E;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --bg-light: #F8F9FA;
+            --white: #FFFFFF;
+            --glass: rgba(255, 255, 255, 0.8);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Utility Bar */
+        .utility-bar {
+            background: #f1f1f1;
+            padding: 8px 5%;
+            display: flex;
+            justify-content: flex-end;
+            font-size: 13px;
+            color: var(--text-light);
+            border-bottom: 1px solid #ddd;
+        }
+
+        .utility-bar span {
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+        .utility-bar span strong {
+            color: var(--text-dark);
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 15px 5%;
+        }
+
+        .header-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-section img {
+            height: 45px;
+        }
+
+        .dealership-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-dark);
+            border-left: 1px solid #ddd;
+            padding-left: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 600;
+        }
+
+        .contact-info .service-num {
+            font-size: 16px;
+        }
+
+        .contact-info .service-num span {
+            color: var(--text-light);
+            font-weight: 400;
+            margin-right: 5px;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            padding: 10px 5%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .nav-item {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            position: relative;
+            padding: 10px 0;
+            white-space: nowrap;
+        }
+
+        .nav-item:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-blue);
+            transition: var(--transition);
+        }
+
+        .nav-item:hover::after {
+            width: 100%;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            margin-left: 20px;
+        }
+
+        .nav-icons i {
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            width: 100%;
+            height: 100%;
+            background-image: url('hero.png');
+            background-size: cover;
+            background-position: center;
+            transition: transform 10s linear;
+        }
+
+        .hero:hover .hero-bg {
+            transform: scale(1.1);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-bar-container {
+            background: var(--white);
+            padding: 15px;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            width: 90%;
+            max-width: 1000px;
+            transform: translateY(50px);
+            opacity: 0;
+            animation: fadeInUp 0.8s forwards;
+        }
+
+        .search-input-group {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            border-right: 1px solid #ddd;
+            padding: 0 15px;
+        }
+
+        .search-input-group:last-of-type {
+            border-right: none;
+        }
+
+        .search-input-group select {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 16px;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .search-btn {
+            background: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 15px 40px;
+            border-radius: 4px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-btn:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Spring Banner */
+        .promo-banner {
+            background: var(--bg-light);
+            padding: 60px 10%;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .promo-content {
+            flex: 1;
+        }
+
+        .promo-content h2 {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .promo-offer {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .promo-offer span {
+            font-size: 72px;
+            font-weight: 900;
+            display: block;
+            line-height: 1;
+        }
+
+        .btn-promo {
+            background: var(--accent-pink);
+            color: var(--white);
+            padding: 15px 40px;
+            font-weight: 700;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .promo-image {
+            flex: 1.2;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .promo-image img {
+            width: 100%;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .promo-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Inventory Section */
+        .inventory-section {
+            padding: 80px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 40px;
+            font-weight: 800;
+            margin-bottom: 40px;
+        }
+
+        .inventory-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .tab {
+            padding: 12px 30px;
+            border-radius: 30px;
+            background: #f1f1f1;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tab.active {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .car-card {
+            background: var(--bg-light);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .car-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .car-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+            background: var(--white);
+        }
+
+        .car-card img {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .car-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* Why Choose Us */
+        .why-choose-us {
+            padding: 80px 10%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            text-align: center;
+            background: var(--white);
+        }
+
+        .feature-item {
+            padding: 30px;
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-light);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .feature-item:hover .feature-icon {
+            background: var(--primary-blue);
+            color: var(--white);
+            transform: rotateY(360deg);
+        }
+
+        .feature-icon svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        .feature-item h4 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            display: flex;
+            align-items: center;
+            padding: 80px 10%;
+            gap: 60px;
+            background: #f9f9f9;
+        }
+
+        .welcome-image {
+            flex: 1;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .welcome-image img {
+            width: 100%;
+            display: block;
+        }
+
+        .welcome-content {
+            flex: 1;
+        }
+
+        .welcome-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .btn-outline {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 35px;
+            border: 2px solid var(--text-dark);
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .btn-outline:hover {
+            background: var(--text-dark);
+            color: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: var(--white);
+            padding: 80px 10% 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h4 {
+            font-size: 18px;
+            margin-bottom: 25px;
+            color: var(--secondary-blue);
+        }
+
+        .footer-col ul li {
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #999;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 968px) {
+            .nav-container {
+                display: none;
+            }
+
+            .promo-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .why-choose-us {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome-section {
+                flex-direction: column;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Accessibility */
+        .accessibility-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: #007bff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            cursor: pointer;
+            z-index: 1000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="utility-bar">
+        <span>Service: <strong>754-755-8595</strong></span>
+        <span>Sales: <strong>754-755-8500</strong></span>
+        <span>Español Subaru</span>
+    </div>
+
+    <header>
+        <div class="header-main">
+            <div class="logo-section">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Subaru_logo_%28transparent%29.svg"
+                    alt="Subaru Logo">
+                <div class="dealership-name">Coconut Creek Subaru</div>
+            </div>
+            <div class="contact-info">
+                <div class="service-num"><span>Service</span> 754-755-8595</div>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <div class="nav-item">New Vehicles</div>
+            <div class="nav-item">Hybrids & EVs</div>
+            <div class="nav-item">Used Vehicles</div>
+            <div class="nav-item">Shop From Home</div>
+            <div class="nav-item">Finance & Specials</div>
+            <div class="nav-item">Service & Parts</div>
+            <div class="nav-item">About Us</div>
+            <div class="nav-item">Love Promise</div>
+            <div class="nav-icons">
+                <i>👤</i>
+                <i>🔍</i>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay">
+            <div class="search-bar-container">
+                <div class="search-input-group">
+                    <select>
+                        <option>New 240</option>
+                        <option>Used 150</option>
+                        <option>Certified 45</option>
+                    </select>
+                </div>
+                <div class="search-input-group">
+                    <select>
+                        <option>Any Year</option>
+                        <option>2026</option>
+                        <option>2025</option>
+                        <option>2024</option>
+                    </select>
+                </div>
+                <div class="search-input-group">
+                    <select>
+                        <option>All Filters</option>
+                        <option>SUV</option>
+                        <option>Sedan</option>
+                        <option>EV/Hybrid</option>
+                    </select>
+                </div>
+                <button class="search-btn">Search</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="promo-banner">
+        <div class="promo-content">
+            <h2>Spring into Savings!</h2>
+            <div class="promo-offer">
+                NEW 2026 SUBARU ASCENT PREMIUM
+                <span>$259</span>
+                PER MO. PLUS TAX | 36 MONTH LEASE
+            </div>
+            <a href="#" class="btn-promo">VIEW SPECIALS</a>
+        </div>
+        <div class="promo-image">
+            <img src="spring_banner.png" alt="Spring Sale">
+        </div>
+    </section>
+
+    <section class="inventory-section">
+        <h2 class="section-title">Shop New</h2>
+        <div class="inventory-tabs">
+            <div class="tab active" onclick="filterInventory('all')">All Models</div>
+            <div class="tab" onclick="filterInventory('electric')">Electric</div>
+            <div class="tab" onclick="filterInventory('gas')">Gas</div>
+            <div class="tab" onclick="filterInventory('hybrid')">Hybrid</div>
+            <div class="tab" onclick="filterInventory('wilderness')">Wilderness</div>
+        </div>
+        <div class="inventory-grid" id="inventory-grid">
+            <div class="car-card visible" data-type="gas">
+                <img src="crosstrek.png" alt="Subaru Crosstrek">
+                <h3>Crosstrek SUV</h3>
+                <a href="#" class="btn-outline" style="margin-top: 10px; padding: 8px 20px;">Details</a>
+            </div>
+            <div class="car-card visible" data-type="gas">
+                <img src="forester.png" alt="Subaru Forester">
+                <h3>Forester SUV</h3>
+                <a href="#" class="btn-outline" style="margin-top: 10px; padding: 8px 20px;">Details</a>
+            </div>
+            <div class="car-card visible" data-type="electric">
+                <img src="solterra.png" alt="Subaru Solterra">
+                <h3>Solterra SUV</h3>
+                <a href="#" class="btn-outline" style="margin-top: 10px; padding: 8px 20px;">Details</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-choose-us">
+        <div class="feature-item">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M16 3H1v13h15V3zM16 8h4l3 3v5h-7V8zM5.5 21a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM17.5 21a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" />
+                </svg>
+            </div>
+            <h4>Fast Trade-in Value</h4>
+            <p>Tell us about your car and we'll give you an accurate value today!</p>
+            <a href="#" style="color: var(--primary-blue); font-weight: 600; text-decoration: underline;">Value Your
+                Trade</a>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+            </div>
+            <h4>No Hassle Financing</h4>
+            <p>We'll work with you to design a plan for your lifestyle & budget.</p>
+            <a href="#" style="color: var(--primary-blue); font-weight: 600; text-decoration: underline;">Learn about
+                financing</a>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82zM7 7h.01" />
+                </svg>
+            </div>
+            <h4>Competitive Specials</h4>
+            <p>Browse our latest offers and save big on your next car!</p>
+            <a href="#" style="color: var(--primary-blue); font-weight: 600; text-decoration: underline;">View
+                Specials</a>
+        </div>
+    </section>
+
+    <section class="welcome-section">
+        <div class="welcome-image">
+            <img src="hero.png" alt="Dealership">
+        </div>
+        <div class="welcome-content">
+            <h2>Welcome to Coconut Creek Subaru</h2>
+            <p><strong>South Florida's Fastest Growing Subaru Dealer!</strong></p>
+            <p>Coconut Creek Subaru welcomes you to our Subaru dealership near you. Visit our Subaru Showroom, Service
+                Center, Finance Center, Leasing Office, and Auto Parts Store, all under one roof, to best serve you and
+                your family.</p>
+            <a href="#" class="btn-outline">View Inventory</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Inventory</h4>
+                <ul>
+                    <li>New Subaru</li>
+                    <li>Used Inventory</li>
+                    <li>Certified Pre-Owned</li>
+                    <li>Vehicle Specials</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Service & Parts</h4>
+                <ul>
+                    <li>Schedule Service</li>
+                    <li>Service Specials</li>
+                    <li>Order Parts</li>
+                    <li>Subaru Accessories</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Finance</h4>
+                <ul>
+                    <li>Finance Application</li>
+                    <li>Trade-in Value</li>
+                    <li>Payment Calculator</li>
+                    <li>Lease vs Buy</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li>4980 N State Rd 7</li>
+                    <li>Coconut Creek, FL 33073</li>
+                    <li>Sales: 754-755-8500</li>
+                    <li>Service: 754-755-8595</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>© 2026 Coconut Creek Subaru. All Rights Reserved.</div>
+            <div>Privacy Policy | Sitemap | Accessibility</div>
+        </div>
+    </footer>
+
+    <div class="accessibility-btn">♿</div>
+
+    <script>
+        function filterInventory(type) {
+            const cards = document.querySelectorAll('.car-card');
+            const tabs = document.querySelectorAll('.tab');
+
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+
+            cards.forEach(card => {
+                if (type === 'all' || card.getAttribute('data-type') === type) {
+                    card.style.display = 'block';
+                    setTimeout(() => card.classList.add('visible'), 50);
+                } else {
+                    card.classList.remove('visible');
+                    setTimeout(() => card.style.display = 'none', 300);
+                }
+            });
+        }
+
+        // Scroll animation for cards
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.car-card').forEach(card => observer.observe(card));
+    </script>
+    <script src="https://widgets.leadconnectorhq.com/loader.js"
+        data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+        data-widget-id="69dcb499b5c4e04aa3ec64ee"></script>
+</body>
+
+</html>
